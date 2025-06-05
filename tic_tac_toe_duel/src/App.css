@@ -1,51 +1,77 @@
 :root {
-  --primary-bg: #ffffff;
-  --secondary-color: #000000;
-  --accent-color: #2196f3;
-  --ttt-border: #e0e0e0;
+  /* 90s NEON palette! */
+  --primary-bg: #231e36;
+  --secondary-color: #32fbe2;
+  --accent-color: #ff38b4;
+  --yellow-neon: #ffe12e;
+  --blue-neon: #2e8bff;
+  --purple-neon: #a259f7;
+  --green-neon: #39ff14;
+  --ttt-border: #39ff14;
+  --retro-shadow-dark: 0 8px 24px 2px #10102b, 0 0px 2px 2px #ff38b480;
+  --retro-shadow-neon: 0 2px 12px 2px #ff38b450, 0 0px 2px 1px #ffe12e88;
+  --retro-pattern: repeating-linear-gradient(135deg, #231e36, #231e36 12px, #2e8bff 12px, #2e8bff 24px, #231e36 24px, #231e36 36px);
 }
+
+/* Import a pixel retro font (if available online, or fallback). */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 body {
   margin: 0;
-  font-family: 'Inter', 'Roboto', 'Helvetica', 'Arial', sans-serif;
-  background-color: var(--primary-bg);
+  font-family: 'Press Start 2P', 'Courier New', 'monospace', 'Arial Black', sans-serif;
+  background: var(--retro-pattern), linear-gradient(135deg, #231e36 0%, #a259f7 100%);
+  /* fallback: solid bg if font doesn't load */
   color: var(--secondary-color);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: unset;
 }
 
 .app {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background: var(--retro-pattern), linear-gradient(120deg, #2e8bff 0%, #ff38b4 35%, #ffe12e 100%);
 }
 
 .navbar {
-  background-color: var(--primary-bg);
-  color: var(--secondary-color);
-  padding: 16px;
+  background: var(--purple-neon), var(--retro-pattern);
+  color: var(--yellow-neon);
+  padding: 16px 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1.5px solid var(--ttt-border);
+  border-bottom: 6px double var(--ttt-border);
+  border-top: 6px solid var(--accent-color);
   position: fixed;
   top: 0;
   width: 100%;
   box-sizing: border-box;
   z-index: 100;
+  text-shadow: 1px 2px 0px #ffe12e, 5px 5px 12px #10102b;
+  font-family: 'Press Start 2P', 'Courier New', cursive, monospace;
+  letter-spacing: 2.5px;
+  box-shadow: 0 5px 28px 2px #231e36e0, 0 2px 3px 3px #39ff14b0;
 }
 
 .logo {
-  font-size: 1.25rem;
-  font-weight: 600;
+  font-size: 2rem;
+  font-weight: 900;
   display: flex;
   align-items: center;
-  gap: 8px;
-  color: var(--accent-color);
+  gap: 12px;
+  color: var(--yellow-neon);
+  font-family: 'Press Start 2P', 'Courier New', 'Arial Black', cursive, monospace;
+  letter-spacing: 3px;
+  text-shadow: 0 0 6px #ffe12e, 0 0 2px #39ff14;
+  filter: drop-shadow(2px 4px 0 var(--accent-color));
 }
 
 .logo-symbol {
   color: var(--accent-color);
+  font-size: 2.1em;
+  text-shadow: 0 0 8px #2196f3, 1px 2px 0px #ffe12e;
+  margin-right: 2px;
+  font-weight: 900;
 }
 
 .container {
@@ -54,6 +80,11 @@ body {
   padding: 0 24px;
   width: 100%;
   box-sizing: border-box;
+  background: transparent;
+  border-radius: 18px;
+  border: 6px double var(--accent-color);
+  box-shadow: 0 6px 36px 0 #39ff1460;
+  font-family: 'Press Start 2P', 'Courier New', monospace, 'Arial Black', cursive;
 }
 
 .hero {
@@ -64,71 +95,115 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 24px;
+  background: linear-gradient(120deg, #2e8bff80 0%, #ffe12e40 100%);
+  border-radius: 16px;
+  border: 7px ridge #ff38b4;
+  box-shadow: 0 6px 24px #231e3685;
+  font-family: 'Press Start 2P', 'Courier New', monospace;
 }
 
 .subtitle {
-  color: var(--accent-color);
-  font-weight: 500;
-  font-size: 1.1rem;
+  color: var(--green-neon);
+  font-weight: 700;
+  font-size: 1rem;
+  font-family: 'Press Start 2P', 'Courier New', monospace;
+  text-shadow: 0 0 9px #ffe12e, 1px 2px 0px #231e36;
 }
 
 .title {
-  font-size: 3.5rem;
-  font-weight: 600;
-  line-height: 1.2;
-  margin: 0;
+  font-size: 2.5rem;
+  font-weight: 900;
+  letter-spacing: 3px;
+  color: var(--yellow-neon);
+  margin: 0 0 12px 0;
+  font-family: 'Press Start 2P', 'Courier New', monospace;
+  text-shadow: 1px 1px 0px #39ff14, 0 0 8px #32fbe2;
+  border-bottom: 5px dashed var(--accent-color);
+  display: inline-block;
+  padding-bottom: 12px;
 }
 
 .description {
-  font-size: 1.1rem;
-  line-height: 1.5;
-  color: #bbbbbb;
+  font-size: 1rem;
+  line-height: 1.3;
+  color: var(--purple-neon);
   max-width: 600px;
   margin-bottom: 16px;
+  font-family: 'Press Start 2P', 'Courier New', monospace;
+  text-shadow: 0 0 4px #ffe12e;
+  background: #231e3640;
+  border-radius: 9px;
+  border: 4px double var(--ttt-border);
+  padding: 10px 14px;
+  box-shadow: 0 3px 24px #39ff1430;
 }
 
 .btn {
-  background-color: var(--accent-color);
-  color: white;
-  border: none;
-  border-radius: 4px;
-  padding: 10px 20px;
-  font-size: 1rem;
-  font-weight: 500;
+  background: linear-gradient(90deg, var(--accent-color), var(--yellow-neon));
+  color: var(--secondary-color);
+  border: 4px solid var(--purple-neon);
+  border-radius: 10px;
+  padding: 12px 26px;
+  font-size: 1.15rem;
+  font-family: 'Press Start 2P', 'Courier New', monospace;
+  font-weight: 900;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  letter-spacing: 2px;
+  transition: 
+    background 0.16s,
+    box-shadow 0.12s,
+    border 0.15s,
+    color 0.11s;
+  box-shadow: 0 2px 14px 2px #39ff1450;
+  text-shadow: 1px 2px 0px #fff, 0 0 6px #39ff14;
 }
-.btn:hover {
-  background-color: #1976d2;
+.btn:hover, .btn:focus {
+  background: linear-gradient(90deg, #ff38b4 40%, #2e8bff 120%);
+  color: var(--yellow-neon);
+  border-color: var(--green-neon);
+  box-shadow: 0 4px 24px 2px #ff38b4, 0 0 15px #39ff14;
+  outline: none;
 }
 .btn-large {
-  padding: 12px 24px;
-  font-size: 1.1rem;
+  padding: 14px 38px;
+  font-size: 1.3rem;
 }
 
 /* --- TicTacToe Duel Styles --- */
 .ttt-container {
-  background: var(--primary-bg);
+  background: repeating-linear-gradient(45deg, #231e36 0 28px, #2e8bff 28px 36px) var(--primary-bg);
   color: var(--secondary-color);
-  margin: 80px auto 0 auto;
+  margin: 120px auto 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 32px 24px 40px 24px;
-  border-radius: 14px;
-  min-width: 320px;
-  box-shadow: 0 2px 24px 0 rgba(0,0,0,0.06);
-  max-width: 340px;
+  padding: 48px 38px 44px 38px;
+  border-radius: 18px;
+  border: 7px double var(--ttt-border);
+  min-width: 322px;
+  max-width: 360px;
+  box-shadow: 0 0 32px #39ff1490, 0 8px 40px 0 #10102b90, 0 0 2px 2px #ff38b450;
+  font-family: 'Press Start 2P', 'Courier New', monospace;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
 }
 
 .ttt-status {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 24px;
-  color: var(--secondary-color);
+  font-size: 1.15rem;
+  font-weight: 900;
+  margin-bottom: 30px;
+  color: var(--yellow-neon);
   text-align: center;
-  letter-spacing: 0.03em;
-  min-height: 36px;
+  letter-spacing: 0.17em;
+  min-height: 40px;
+  font-family: 'Press Start 2P', 'Courier New', monospace;
+  text-shadow: 1px 2px 0px #2e8bff, 0 0 18px #39ff1480, 0 0 6px #2196f3;
+  background: #231e3630;
+  border-radius: 8px;
+  border: 4px dotted var(--accent-color);
+  padding: 11px 5px 13px 5px;
+  box-shadow: 0 2px 14px #ff38b4cc inset, 0 3px 18px #39ff141f;
 }
 
 /* Grid */
@@ -138,7 +213,11 @@ body {
   justify-content: center;
   align-items: center;
   margin-bottom: 16px;
-  background: var(--primary-bg);
+  background: transparent;
+  border-radius: 8px;
+  border: 7px double var(--accent-color);
+  box-shadow: 0 0 15px #2e8bff50, 0 4px 18px #39ff1410;
+  padding: 4px 0 3px 0;
 }
 
 .ttt-row {
@@ -147,61 +226,100 @@ body {
 
 /* Cell (Square) */
 .ttt-square {
-  width: 70px;
-  height: 70px;
-  font-size: 2.1rem;
-  font-weight: 600;
-  margin: 2px;
-  background: var(--primary-bg);
-  border: 1.5px solid var(--ttt-border);
-  border-radius: 8px;
+  width: 77px;
+  height: 77px;
+  font-size: 2.25rem;
+  font-weight: 900;
+  margin: 5px;
+  background: linear-gradient(135deg,#2e8bff 0%, #231e36 95%);
+  border: 6px solid var(--ttt-border);
+  border-radius: 18px;
   cursor: pointer;
-  transition: border 0.2s, background 0.15s;
-  color: var(--secondary-color);
+  transition: 
+    border 0.14s, 
+    background 0.14s, 
+    color 0.12s,
+    box-shadow 0.16s;
+  color: var(--yellow-neon);
   outline: none;
   display: flex;
   flex-flow: column;
   align-items: center;
   justify-content: center;
   user-select: none;
+  font-family: 'Press Start 2P', 'Courier New', monospace, sans-serif;
+  box-shadow: 0 1px 9px #39ff14b4, 0 1px 2px #ffe12e52;
+  text-shadow: 0 0 8px #ffe12e, 2px 2px 0 #ff38b4;
+  position: relative;
 }
-.ttt-square:focus {
-  border: 2.5px solid var(--accent-color);
+.ttt-square:focus, .ttt-square:hover {
+  border: 7px solid var(--accent-color);
+  background: #ffe12e;
+  color: var(--purple-neon);
+  box-shadow: 0 0 18px #ff38b488, 0 4px 24px #2e8bffb2;
+  text-shadow: 0 0 11px #2e8bff, 2px 2px 0 #39ff14;
 }
 .ttt-square[disabled], .ttt-square:disabled {
-  background: #f2f2f2;
+  background: #231e36cc;
   cursor: not-allowed;
-  color: #c6c6c6;
+  color: #bbbbbb;
+  border: 6px dashed #ff38b4;
+  box-shadow: 0 1px 2px #2e8bff80;
+  text-shadow: none;
 }
 
 .ttt-reset-btn {
-  padding: 10px 28px;
-  border-radius: 5px;
-  border: none;
-  background: var(--accent-color);
-  color: #fff;
-  font-weight: 500;
-  font-size: 1.1rem;
-  letter-spacing: 0.02em;
+  padding: 18px 62px;
+  border-radius: 16px;
+  border: 6px double var(--green-neon);
+  background: linear-gradient(90deg, #ff38b4 0%, #39ff14 100%);
+  color: #231e36;
+  font-weight: 900;
+  font-size: 1.2rem;
+  font-family: 'Press Start 2P', 'Courier New', monospace;
+  letter-spacing: 0.09em;
+  text-shadow: 3px 2px #ffe12e, 0 0 8px #2e8bff;
   cursor: pointer;
-  margin-top: 18px;
-  transition: background 0.18s;
-  box-shadow: 0 2px 6px 0 rgba(33, 150, 243, 0.05);
+  margin-top: 30px;
+  box-shadow: 0 6px 22px 0 #a259f798, 0 2px 8px #39ff1477;
+  transition: 
+    background 0.18s,
+    color 0.13s,
+    border 0.14s,
+    box-shadow 0.12s;
 }
-.ttt-reset-btn:hover {
-  background: #1976d2;
+.ttt-reset-btn:hover, .ttt-reset-btn:focus {
+  background: linear-gradient(90deg, #39ff14 0%, #ff38b4 100%);
+  color: var(--yellow-neon);
+  border: 6px solid #ffe12e;
+  box-shadow: 0 0 40px #2e8bff80, 0 2px 22px #ff38b488;
+  outline: none;
 }
 
 @media (max-width: 480px) {
   .ttt-container {
     min-width: unset;
     max-width: 100vw;
-    padding: 16px 2vw 24px 2vw;
+    border-width: 5px;
+    padding: 10px 1vw 16px 1vw;
   }
   .ttt-square {
-    width: 54px;
-    height: 54px;
-    font-size: 1.35rem;
+    width: 45px;
+    height: 45px;
+    border-width: 3.5px;
+    font-size: 0.95rem;
+    border-radius: 6px;
+    margin: 3.5px;
+  }
+  .ttt-reset-btn {
+    padding: 12px 14px;
+    font-size: 0.9rem;
+    border-width: 3px;
+  }
+  .ttt-status {
+    font-size: 0.82rem;
+    border-width: 2.5px;
+    padding: 6px 2px 7px 2px;
   }
 }
 /* --- END TicTacToe Styles --- */

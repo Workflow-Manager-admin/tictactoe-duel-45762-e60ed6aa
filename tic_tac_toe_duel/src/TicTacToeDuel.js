@@ -3,54 +3,40 @@ import React, { useState } from "react";
 // PUBLIC_INTERFACE
 function TicTacToeDuel() {
   /**
-   * This is the main container for the TicTacToe Duel game.
-   * It handles game state, win/draw logic, status, and rendering the grid and controls.
-   * Color theme: primary (#ffffff), secondary (#000000), accent (#2196f3).
+   * 90s Retro style: vibrant neon color assignment for player X/O, thick borders,
+   * drop shadow, pixel-game font, grid overlay, classic arcade styling.
    */
 
-  // "X" always goes first on reset
+  // Always X starts game, then two-player local.
   const [board, setBoard] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
   const [status, setStatus] = useState("Player X's turn");
   const [isGameOver, setIsGameOver] = useState(false);
-
-  // Winning line indices for grid highlights (optional)
   const [winningLine, setWinningLine] = useState(null);
 
-  // Utility to check for a win/draw and update status
+  // Neon palette for X/O
+  const NEON_X = "#ff38b4";
+  const NEON_O = "#39ff14";
+  const WIN_BG = "#ffe12e";
+  const DRAW_BG = "#a259f7";
+
   function evaluateGame(boardState) {
     const lines = [
-      [0, 1, 2],
-      [3, 4, 5],
-      [6, 7, 8], // rows
-      [0, 3, 6],
-      [1, 4, 7],
-      [2, 5, 8], // cols
-      [0, 4, 8],
-      [2, 4, 6], // diagonals
+      [0, 1, 2],[3, 4, 5],[6, 7, 8], // rows
+      [0, 3, 6],[1, 4, 7],[2, 5, 8], // columns
+      [0, 4, 8],[2, 4, 6] // diagonals
     ];
-
     for (let line of lines) {
       const [a, b, c] = line;
-      if (
-        boardState[a] &&
-        boardState[a] === boardState[b] &&
-        boardState[a] === boardState[c]
-      ) {
+      if (boardState[a] && boardState[a] === boardState[b] && boardState[a] === boardState[c])
         return { winner: boardState[a], line };
-      }
     }
-    // Draw if no nulls and no winner
-    if (boardState.every((cell) => cell !== null)) {
-      return { draw: true };
-    }
+    if (boardState.every(cell => cell !== null)) return { draw: true };
     return null;
   }
 
-  // Handle a square click
   function handleClick(i) {
     if (board[i] || isGameOver) return;
-
     const newBoard = [...board];
     newBoard[i] = xIsNext ? "X" : "O";
     setBoard(newBoard);
@@ -71,7 +57,6 @@ function TicTacToeDuel() {
     }
   }
 
-  // Reset the game
   function handleReset() {
     setBoard(Array(9).fill(null));
     setXIsNext(true);
@@ -80,31 +65,37 @@ function TicTacToeDuel() {
     setWinningLine(null);
   }
 
-  // Render one square
   function renderSquare(i) {
-    // If part of a winning line, highlight with accent
     const isWinning = winningLine?.includes(i);
+    const value = board[i];
+    let neonColor = value === "X" ? NEON_X : (value === "O" ? NEON_O : "#ffe12e");
+    let squareClass = "ttt-square";
+    if (isWinning) squareClass += " ttt-square-win";
+    if (isGameOver && !winningLine && value) squareClass += " ttt-square-draw";
+
     return (
       <button
         key={i}
-        className="ttt-square"
-        onClick={() => handleClick(i)}
+        className={squareClass}
+        /* Only coloring by class, not inline */
         style={{
-          color: board[i] === "X" ? "#2196f3" : "#000",
-          background: "#fff",
-          border: isWinning
-            ? "2px solid #2196f3"
-            : "1.5px solid #e0e0e0",
-          fontWeight: isWinning ? "700" : "500",
+          color: value ? neonColor : "#ffe12e",
+          filter: isWinning ? "drop-shadow(0 0 9px #ffe12e) drop-shadow(0 0 13px #ff38b4)" : undefined,
+          background: isWinning
+            ? WIN_BG
+            : (isGameOver && !winningLine && value
+                ? DRAW_BG
+                : undefined),
         }}
+        onClick={() => handleClick(i)}
+        disabled={isGameOver || !!value}
         aria-label={`cell ${i + 1}`}
       >
-        {board[i]}
+        {value}
       </button>
     );
   }
 
-  // Render the full grid (3x3)
   function renderGrid() {
     return (
       <div className="ttt-grid">
@@ -122,14 +113,11 @@ function TicTacToeDuel() {
       <div className="ttt-status">{status}</div>
       {renderGrid()}
       <button
-        className="ttt-reset-btn"
+        className="ttt-reset-btn btn-large"
         onClick={handleReset}
-        style={{
-          marginTop: 24,
-        }}
         aria-label="reset game"
       >
-        Reset
+        RESET
       </button>
     </div>
   );
